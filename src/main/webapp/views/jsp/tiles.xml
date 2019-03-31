@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+    <definition name="layout.definition"
+                template="/views/jsp/layout.jsp">
+        <put-attribute name="title" value="" />
+        <put-attribute name="header" value="/views/jsp/views/header.jsp" />
+        <put-attribute name="menu" value="/views/jsp/views/menu.jsp" />
+        <put-attribute name="content" value="" />
+        <put-attribute name="footer" value="/views/jsp/views/footer.jsp" />
+    </definition>
+
+    <definition name="provider" extends="layout.definition">
+        <put-attribute name="title" value="OfferManager | Provider" />
+        <put-attribute name="content" value="/views/jsp/views/provider.jsp" />
+    </definition>
+    <definition name="description" extends="layout.definition">
+        <put-attribute name="title" value="OfferManager | Description" />
+        <put-attribute name="content" value="/views/jsp/views/description.jsp" />
+    </definition>
+
+</tiles-definitions>

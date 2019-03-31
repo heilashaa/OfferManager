@@ -11,7 +11,8 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 
 import javax.sql.DataSource;
 import java.util.Properties;
@@ -26,12 +27,15 @@ public class AppContextConfig {
     private Environment environment;
 
     @Bean
-    public InternalResourceViewResolver getViewResolver(){
-        final InternalResourceViewResolver viewResolver =  new InternalResourceViewResolver();
-        viewResolver.setOrder(1);
-        viewResolver.setPrefix("/views/");
-        viewResolver.setSuffix(".jsp");
-        return viewResolver;
+    public TilesViewResolver getViewResolver(){
+        return new TilesViewResolver();
+    }
+
+    @Bean
+    public TilesConfigurer getTilesConfigurer(){
+        TilesConfigurer tilesConfigurer = new TilesConfigurer();
+        tilesConfigurer.setDefinitions("/views/jsp/tiles.xml");
+        return tilesConfigurer;
     }
 
     @Bean
