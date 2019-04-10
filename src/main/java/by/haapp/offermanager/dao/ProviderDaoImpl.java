@@ -5,10 +5,12 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
+@Transactional
 public class ProviderDaoImpl implements ProviderDao {
 
     @Autowired
@@ -16,8 +18,8 @@ public class ProviderDaoImpl implements ProviderDao {
 
     @Override
     public List<Provider> getAllProviders() {
-        Session session = this.sessionFactory.getCurrentSession();
-        List<Provider> providersList = session.createQuery("from Person").list();
+        Session session = sessionFactory.getCurrentSession();
+        List<Provider> providersList = session.createQuery("from Provider").list();
         return providersList;
     }
 

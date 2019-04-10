@@ -15,7 +15,7 @@ public class ProviderServiceImpl implements ProviderService {
 
     @Override
     public List<Provider> getAllProviders() {
-        return null;
+        return this.providerDao.getAllProviders();
     }
 
     @Override
