@@ -1,45 +1,40 @@
 package by.haapp.offermanager.dao;
 
 import by.haapp.offermanager.model.Provider;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
-@Transactional
-public class ProviderDaoImpl implements ProviderDao {
+public class ProviderDaoImpl extends AbstractDao implements ProviderDao {
 
-    @Autowired
-    private SessionFactory sessionFactory;
-
+    @SuppressWarnings("unchecked")
     @Override
     public List<Provider> getAllProviders() {
-        Session session = sessionFactory.getCurrentSession();
-        List<Provider> providersList = session.createQuery("from Provider").list();
-        return providersList;
+        return (List<Provider>) getSession().createQuery("from Provider").list();
     }
 
     @Override
     public Provider getProviderById(Integer id) {
-        return null;
+        Provider provider = (Provider) getSession().get(Provider.class, id);
+        return provider;
     }
 
     @Override
     public void addProvider(Provider provider) {
-
+        getSession().persist(provider);
     }
 
     @Override
     public void removeProvider(Integer id) {
-
+        Provider provider = (Provider) getSession().load(Provider.class, id);
+        if(null != provider){
+            getSession().delete(provider);
+        }
     }
 
     @Override
     public void updateProvider(Provider provider) {
-
+        getSession().update(provider);
     }
 }

@@ -5,99 +5,79 @@
 <div class="card mt-5">
     <div class="card-body">
         <h4 class="header-title">Providers</h4>
-        <form class="needs-validation" novalidate="" method="get" action="${pageContext.request.contextPath}/provider">
+        <form:form modelAttribute="provider" method="post" action="/provider">
             <div class="form-row">
-                <div class="col-md-4 mb-3">
-                    <label for="validationCustom01">Provider</label>
-                    <input name="provider" type="text" class="form-control" id="validationCustom01" placeholder="Provider" value="" autocomplete="off">
+                <div class="col-md-6 mb-3">
+                    <form:input path="id" id="id" type="hidden"/>
+                    <label for="provider">Provider</label>
+                    <form:input path="provider" name="provider" type="text" class="form-control" id="provider" placeholder="Provider"  autocomplete="off"/>
+                    <span class="text-danger"><form:errors path="provider"/></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="description">Description</label>
+                    <form:input path="description" name="description" type="text" class="form-control" id="description" placeholder="Description" autocomplete="off"/>
+                    <span class="text-danger"><form:errors path="description"/></span>
                 </div>
             </div>
             <div class="form-row">
-                <div class="col-md-4 mb-3">
-                    <label for="validationCustom02">Country</label>
-                    <input name="country" type="text" class="form-control" id="validationCustom02" placeholder="Country" value="" autocomplete="off">
+                <div class="col-md-6 mb-3">
+                    <label for="country">Country</label>
+                    <form:input path="country" name="country" type="text" class="form-control" id="country" placeholder="Country"  autocomplete="off"/>
+                    <span class="text-danger"><form:errors path="country"/></span>
+                </div>
+                <div class="col-md-6 mb-3">
+                    <label for="contact">Contact</label>
+                    <form:input path="contact" name="contact" type="text" class="form-control" id="contact" placeholder="contact"  autocomplete="off"/>
+                    <span class="text-danger"><form:errors path="contact"/></span>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="col-md-4 mb-3">
-                    <label for="validationCustom03">Description</label>
-                    <input name="description" type="text" class="form-control" id="validationCustom03" placeholder="Description" value="" autocomplete="off">
-                </div>
-            </div>
-            <button class="btn btn-warning" type="submit">Submit</button>
-        </form>
+            <c:if test="${empty provider.provider}">
+                <button class="btn btn-warning" type="submit">Add</button>
+            </c:if>
+            <c:if test="${!empty provider.provider}">
+                <button class="btn btn-warning" type="submit">Save changes</button>
+            </c:if>
+        </form:form>
     </div>
 </div>
-
-
-<%--<form:form action="/provider/add" method="post" commandName="provider">--%>
-    <%--<table>--%>
-        <%--<c:if test="${!empty person.name}">--%>
-            <%--<tr>--%>
-                <%--<td>--%>
-                    <%--<form:label path="id">--%>
-                        <%--<spring:message text="ID"/>--%>
-                    <%--</form:label>--%>
-                <%--</td>--%>
-                <%--<td>--%>
-                    <%--<form:input path="id" readonly="true" size="8"  disabled="true" />--%>
-                    <%--<form:hidden path="id" />--%>
-                <%--</td>--%>
-            <%--</tr>--%>
-        <%--</c:if>--%>
-        <%--<tr>--%>
-            <%--<td>--%>
-                <%--<form:label path="name">--%>
-                    <%--<spring:message text="Name"/>--%>
-                <%--</form:label>--%>
-            <%--</td>--%>
-            <%--<td>--%>
-                <%--<form:input path="name" />--%>
-            <%--</td>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-            <%--<td>--%>
-                <%--<form:label path="country">--%>
-                    <%--<spring:message text="Country"/>--%>
-                <%--</form:label>--%>
-            <%--</td>--%>
-            <%--<td>--%>
-                <%--<form:input path="country" />--%>
-            <%--</td>--%>
-        <%--</tr>--%>
-        <%--<tr>--%>
-            <%--<td colspan="2">--%>
-                <%--<c:if test="${!empty person.name}">--%>
-                    <%--<input type="submit"--%>
-                           <%--value="<spring:message text="Edit Person"/>" />--%>
-                <%--</c:if>--%>
-                <%--<c:if test="${empty person.name}">--%>
-                    <%--<input type="submit"--%>
-                           <%--value="<spring:message text="Add Person"/>" />--%>
-                <%--</c:if>--%>
-            <%--</td>--%>
-        <%--</tr>--%>
-    <%--</table>--%>
-<%--</form:form>--%>
-<%--<br>--%>
-<%--<h3>Persons List</h3>--%>
-<%--<c:if test="${!empty listPersons}">--%>
-    <table class="tg">
-        <tr>
-            <th width="80">Provider ID</th>
-            <th width="120">Description</th>
-            <th width="120">Country</th>
-            <th width="60">Edit</th>
-            <th width="60">Delete</th>
-        </tr>
-        <c:forEach items="${listProviders}" var="provider">
-            <tr>
-                <td>${provider.description}</td>
-                <td>${provider.description}</td>
-                <td>${provider.country}</td>
-                <td><a href="<c:url value='/edit/${provider.id}' />" >Edit</a></td>
-                <td><a href="<c:url value='/remove/${provider.id}' />" >Delete</a></td>
-            </tr>
-        </c:forEach>
-    </table>
-<%--</c:if>--%>
+<div class="col-lg-12 mt-5">
+    <div class="card-body">
+            <c:if test="${!empty listProviders}">
+            <h4 class="header-title">Providers set</h4>
+            <div class="single-table">
+                <div class="table-responsive">
+                    <table class="table table-hover text-center table-sm">
+                        <thead class="text-uppercase bg-secondary">
+                        <tr class="text-white">
+                            <th scope="col">Provider</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Country</th>
+                            <th scope="col">Contact</th>
+                            <th scope="col"></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <c:forEach items="${listProviders}" var="provider">
+                        <tr>
+                            <td scope="row" class="text-left">${provider.provider}</td>
+                            <td scope="row" class="text-left">${provider.description}</td>
+                            <td scope="row" class="text-left">${provider.country}</td>
+                            <td scope="row" class="text-left">${provider.contact}</td>
+                            <td>
+                                <ul class="d-flex justify-content-center">
+                                    <li class="mr-3"><a href="/provider/edit/${provider.id}" class="text-secondary"><i class="fa fa-edit "></i></a></li>
+                                    <li><a href="/provider/delete/${provider.id}" class="text-secondary"><i class="ti-trash text-warning"></i></a></li>
+                                </ul>
+                            </td>
+                        </tr>
+                        </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            </c:if>
+            <c:if test="${empty listProviders}">
+            <h3>No providers</h3>
+            </c:if>
+        </div>
+</div>

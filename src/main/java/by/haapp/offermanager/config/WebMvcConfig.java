@@ -16,4 +16,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
         registry.addResourceHandler( "/**" )
                 .addResourceLocations( "/views/" );
     }
+
+
 }

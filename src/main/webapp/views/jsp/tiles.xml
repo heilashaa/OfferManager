@@ -17,8 +17,12 @@
         <put-attribute name="content" value="/views/jsp/views/provider.jsp" />
     </definition>
     <definition name="description" extends="layout.definition">
-        <put-attribute name="title" value="OfferManager | Description" />
-        <put-attribute name="content" value="/views/jsp/views/description.jsp" />
+    <put-attribute name="title" value="OfferManager | Description" />
+    <put-attribute name="content" value="/views/jsp/views/description.jsp" />
+</definition>
+    <definition name="error" extends="layout.definition">
+        <put-attribute name="title" value="OfferManager | Error" />
+        <put-attribute name="content" value="/views/jsp/views/error.jsp" />
     </definition>
 
 </tiles-definitions>

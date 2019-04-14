@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface ProviderService {
 
-    public List<Provider> getAllProviders();
-    public Provider getProviderById(Integer id);
-    public void addProvider(Provider provider);
-    public void removeProvider(Integer id);
-    public void updateProvider(Provider provider);
+    List<Provider> getAllProviders();
+    Provider getProviderById(Integer id);
+    void addProvider(Provider provider);
+    void removeProvider(Integer id);
+    void updateProvider(Provider provider);
 
 }
